@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,28 +24,26 @@ public class MainActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        binding.btnClick.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                User user = new User("IT wala");
-                binding.setUser(user);
+        binding.setListeners(this);
+    }
 
-                ArrayList<String> list = new ArrayList<>();
-                list.add("A");
-                list.add("B");
-                list.add("C");
+    public void showUser() {
+        User user = new User("IT wala");
+        binding.setUser(user);
 
-                binding.setList(list);
-                binding.setIndex(0);
+        ArrayList<String> list = new ArrayList<>();
+        list.add("A");
+        list.add("B");
+        list.add("C");
 
-                binding.textViewListItems.setText(list.get(binding.getIndex()));
-            }
-        });
+        binding.setList(list);
+        binding.setIndex(0);
 
-        binding.btnSecondActivity.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(intent);
-            }
-        });
+        binding.textViewListItems.setText(list.get(binding.getIndex()));
+    }
+
+    public void gotoSecondActivity() {
+        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        startActivity(intent);
     }
 }
